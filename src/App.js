@@ -1,10 +1,12 @@
 import React from 'react';
 import logo from './logo.svg';
-import './App.css';
+import './App.scss';
+import NavDesktop from './components/Nav/navDesktop/navDesktop.component';
 
 function App() {
   return (
     <div className="App">
+      <NavDesktop />
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
