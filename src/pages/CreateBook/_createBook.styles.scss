@@ -1,0 +1,24 @@
+.create-page-container {
+  padding: 5em 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    label {
+      color: white;
+      display: flex;
+      flex-direction: column;
+      margin: 2em 0;
+    }
+    textarea,
+    input {
+      margin-top: 0.25em;
+      padding: 0.5em;
+    }
+  }
+}

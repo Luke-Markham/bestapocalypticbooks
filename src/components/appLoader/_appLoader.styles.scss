@@ -1,0 +1,25 @@
+@use '../../utilities/styles';
+
+.app-loader-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  background-color: black;
+}
+
+#loading {
+  transform: scale(0.8);
+  height: 256px;
+  width: 256px;
+  background: url('../../assets/png/sprite1.png') 0px 0px;
+}
+
+#fourZeroFour {
+  transform: scale(0.8);
+  height: 256px;
+  width: 256px;
+  background: url('../../assets/png/sprite2.png') 0px 0px;
+}

@@ -1,0 +1,23 @@
+@mixin priFont {
+  font-family: $primary-font;
+}
+
+@mixin priFontBold {
+  font-family: $primary-font;
+  font-weight: 700;
+}
+
+@mixin secFont {
+  font-family: $secondary-font;
+}
+
+@mixin secFontBold {
+  font-family: $secondary-font;
+  font-weight: 700;
+}
+
+@mixin media($point) {
+  @media screen and (min-width: $point + 'px') {
+    @content;
+  }
+}

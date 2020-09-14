@@ -1,0 +1,56 @@
+@use '../../utilities/styles';
+
+.highlight-container {
+  position: relative;
+  overflow: hidden;
+  padding: 1em;
+  color: white;
+  background-size: 50%;
+  background-repeat: no-repeat;
+  background-position-x: right;
+  background-position-y: center;
+}
+
+.highlight-details-container {
+  width: 50%;
+}
+
+.highlight-title {
+  @include styles.secFontBold;
+  font-size: 2em;
+  @include styles.media(1200) {
+    font-size: 3em;
+    margin: 0;
+  }
+}
+
+.highlight-author {
+  font-size: 0.9em;
+  margin-bottom: 0.75em;
+}
+
+.highlight-blurb {
+  width: 90%;
+  font-size: 1.2em;
+  @include styles.media(1500) {
+    font-size: 1.5em;
+  }
+}
+
+.highlight-buttons-and-audio-container {
+  display: flex;
+  align-items: center;
+  & .audioPlayer-container {
+    margin-left: 1em;
+  }
+}
+
+.close-highlight-button-container {
+  cursor: pointer;
+  width: 1.5em;
+  height: 1.5em;
+  padding: 1em;
+  position: absolute;
+  top: 0;
+  right: 0;
+}

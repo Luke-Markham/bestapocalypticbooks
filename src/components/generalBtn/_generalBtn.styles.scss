@@ -1,0 +1,35 @@
+@use '../../utilities/styles';
+
+#general-btn {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  padding: 0.75em;
+  font-size: 0.95em;
+  margin-right: 0.25em;
+  @include styles.secFontBold;
+}
+
+.purchase {
+  color: black;
+  background-color: white;
+  &:hover {
+    color: white;
+    background-color: black;
+  }
+}
+
+.more-info {
+  color: white;
+  background-color: rgba(73, 71, 71, 0.904);
+}
+
+.purchase,
+.more-info {
+  transition: all 0.4s;
+  &:hover {
+    color: white;
+    background-color: black;
+  }
+}

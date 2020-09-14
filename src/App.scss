@@ -1,38 +1,43 @@
+//  normalize styles
+@use './normalize';
+// page styles
+@use '../src/pages/Home/home.styles';
+@use '../src/pages/CreateBook/createBook.styles';
+@use '../src/pages/404/fourZeroFour.styles';
+// component styles
+@use '../src/components/nav/navDesktop/navDesktop.styles';
+@use '../src/components/searchBar/searchBar.styles';
+@use '../src/components/logo/logo.styles';
+@use '../src/components/introBlock/introBlock.styles';
+@use '../src/components/introFeatureItem/introFeatureItem.styles';
+@use '../src/components/generalBtn/generalBtn.styles';
+@use '../src/components//carouseltem/carouselItem.styles';
+@use '../src/components/itemCarousel/itemCarousel.styles';
+@use '../src/components/carouselAndHighlight/carouselAndHighlight.styles';
+@use '../src/components/highlight/highlight.styles';
+@use '../src/components/audioPlayer/audioPlayer.styles';
+@use '../src/components/loader/loader.styles';
+@use '../src/components/appLoader/appLoader.styles';
+
+// utils
+@use '../src/utilities/styles';
+
 .App {
-  text-align: center;
-}
+  background-color: black;
+  position: relative;
+  @include styles.priFont;
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+  a {
+    text-decoration: none;
+    color: unset;
   }
+  overflow: hidden; /* Hide horizontal scrollbar */
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+body {
+  &::-webkit-scrollbar {
+    display: none;
   }
-  to {
-    transform: rotate(360deg);
-  }
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }

@@ -1,0 +1,36 @@
+@use '../../../utilities/styles';
+
+.desktop-nav {
+  color: white;
+  position: fixed;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 10% 65% 20%;
+  padding: 0.5em 1em;
+  z-index: 100;
+
+  .nav-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  ul {
+    display: flex;
+    padding: 0;
+  }
+  a {
+    list-style-type: none;
+    text-decoration: none;
+    margin: 0 1vmin;
+    color: White;
+    @include styles.priFontBold;
+    &.active {
+      text-decoration: underline;
+    }
+  }
+}
+
+.nav-scroll-bkg {
+  background-color: rgba(0, 0, 0, 0.85);
+}

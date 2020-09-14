@@ -1,0 +1,9 @@
+.audioPlayer-container {
+}
+
+.audio-player {
+  outline: none;
+  &::-webkit-media-controls-panel {
+    background-color: white;
+  }
+}

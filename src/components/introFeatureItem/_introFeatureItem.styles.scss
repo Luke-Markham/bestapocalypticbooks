@@ -1,0 +1,61 @@
+@use '../../utilities/styles';
+
+.feature-item-container {
+  margin-top: auto;
+  display: grid;
+  grid-gap: 1.5em;
+  grid-template-columns: 60% 40%;
+  grid-template-areas:
+    'featureDesc featureImg '
+    'btnLinks featureImg'
+    'loader loader';
+  width: 80%;
+}
+
+.feature-item-img-container {
+  grid-area: featureImg;
+  align-self: center;
+  justify-self: center;
+
+  .feature-item-img {
+    max-width: 100%;
+    height: auto;
+    -webkit-box-shadow: -15px 15px 5px -6px rgba(0, 0, 0, 0.479);
+    -moz-box-shadow: -15px 15px 5px -6px rgba(0, 0, 0, 0.479);
+    box-shadow: -15px 15px 5px -6px rgba(0, 0, 0, 0.479);
+  }
+}
+
+.feature-item-description-container {
+  grid-area: featureDesc;
+  color: white;
+  .feature-item-title {
+    @include styles.secFontBold;
+    font-size: 4em;
+    @include styles.media(1200) {
+      font-size: 5em;
+      margin: 0;
+    }
+  }
+  .feature-item-author {
+    font-size: 0.9em;
+    margin-bottom: 0.75em;
+  }
+  .feature-item-blurb {
+    font-size: 1.2em;
+    @include styles.media(1500) {
+      font-size: 1.5em;
+    }
+  }
+}
+
+.btn-links-and-audio-container {
+  display: flex;
+  align-items: center;
+  grid-area: btnLinks;
+  align-self: flex-end;
+
+  & > .audioPlayer-container {
+    margin-left: auto;
+  }
+}
