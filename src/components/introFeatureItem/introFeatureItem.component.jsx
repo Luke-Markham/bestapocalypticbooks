@@ -1,5 +1,6 @@
 import React from 'react';
 import { handleDesc } from '../../utilities/funcs';
+
 import Fade from 'react-reveal/Fade';
 import GeneralBtn from '../generalBtn/generalBtn.component';
 import AudioPlayer from '../audioPlayer/audioPlayer.component';

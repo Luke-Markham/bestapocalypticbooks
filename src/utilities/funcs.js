@@ -1,6 +1,6 @@
 import React from 'react';
 
-export function handleDesc(description) {
+export function handleDesc(description, length) {
   return description.map((desc, index) => {
     return (
       <span key={index}>

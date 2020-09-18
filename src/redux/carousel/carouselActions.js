@@ -35,6 +35,8 @@ export const fetchCarouselBooksAsync = (genre) => {
         querySnapshot.forEach((doc) => {
           const bookData = doc.data();
           bookData.description = bookData.description.split('*');
+          bookData.description.pop();
+          bookData.description.pop();
           result.push(bookData);
         });
         dispatch(fetchCarouselBooksSuccess({ result, genre }));

@@ -30,6 +30,7 @@
   grid-area: featureDesc;
   color: white;
   .feature-item-title {
+    text-transform: capitalize;
     @include styles.secFontBold;
     font-size: 4em;
     @include styles.media(1200) {
@@ -40,6 +41,7 @@
   .feature-item-author {
     font-size: 0.9em;
     margin-bottom: 0.75em;
+    text-transform: capitalize;
   }
   .feature-item-blurb {
     font-size: 1.2em;

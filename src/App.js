@@ -1,5 +1,6 @@
 import React, { useState, useEffect, Suspense } from 'react';
 import { connect } from 'react-redux';
+import { createBrowserHistory } from 'history';
 import { fetchFeaturedBookAsync } from './redux/featuredBook/featuredBookActions';
 import { cacheImage } from './utilities/funcs';
 import mainBkg from '../src/assets/png/IntroBkg-min.png';
@@ -9,8 +10,12 @@ import {
   Switch,
   Route,
   Redirect,
+  useParams,
 } from 'react-router-dom';
 import AppLoader from './components/appLoader/appLoader.component';
+import IntroFeatureItem from './components/introFeatureItem/introFeatureItem.component';
+
+const customHistory = createBrowserHistory();
 
 const ErrorBoundary = React.lazy(() =>
   import('./components/errorBoundary/error-boundary.component')
@@ -40,7 +45,7 @@ function App({ fetchFeaturedBookAsync }) {
       {isLoading ? (
         <AppLoader />
       ) : (
-        <Router>
+        <Router history={customHistory}>
           <Suspense fallback={<AppLoader />}>
             <NavDesktop />
             <ErrorBoundary>
@@ -53,6 +58,9 @@ function App({ fetchFeaturedBookAsync }) {
                 </Route>
                 <Route exact path="/create">
                   <CreateBook />
+                </Route>
+                <Route path="/:id">
+                  <IntroFeatureItem />
                 </Route>
                 <Route path="*">
                   <FourZeroFour />

@@ -69,7 +69,7 @@ const Highlight = ({ book, handleOpenHighlight, setActiveItem }) => {
             alt="close highlight button"
             onClick={() => {
               handleOpenHighlight(false);
-              setActiveItem(false);
+              setTimeout(() => setActiveItem(false), 300);
             }}
           />
         </div>
