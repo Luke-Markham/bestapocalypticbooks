@@ -20,12 +20,16 @@
 
   background-repeat: no-repeat;
   background-size: cover;
+
+  & .full-book-container {
+    margin-top: auto;
+  }
 }
 
 .intro-block-down-arrow {
   cursor: pointer;
   width: 2.5em;
-  margin-top: 3.5em;
+  margin-top: 5.5em;
   margin-bottom: 1em;
   animation: slideDown 0.8s 1.2s linear 3 backwards;
   transition: all 0.4s;

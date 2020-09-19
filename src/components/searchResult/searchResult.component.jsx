@@ -1,28 +1,54 @@
 import React from 'react';
 
-const SearchResult = ({ result, index }) => {
+import { connect } from 'react-redux';
+import { fetchBookPageBookSuccess } from '../../redux/bookPage/bookPageActions';
+import { toggleSearchBar } from '../../redux/search/searchActions';
+import { dashlize } from '../../utilities/funcs';
+
+const SearchResult = ({
+  result,
+  pushBookToBookPageState,
+  toggleSearchBar,
+  setSearchValue,
+  history,
+}) => {
+  const handleTitleClick = () => {
+    pushBookToBookPageState(result);
+    history.push(`books/${dashlize(result.title)}`);
+    toggleSearchBar();
+    setSearchValue('');
+  };
   const book = (
-    <>
+    <span className="search-result" onClick={() => handleTitleClick()}>
       {result.title} - {result.author}{' '}
       {result.series ? '(' + result.series.name + ')' : null}
-    </>
+    </span>
   );
 
-  const author = <>{result.author} (Author)</>;
-  const series = <>{result.series} (Series)</>;
-  //   const genre = <>{result.tags} (genre)</>;
+  const author = (
+    <span className="search-result">{result.author} (Author)</span>
+  );
+  const series = (
+    <span className="search-result">{result.series} (Series)</span>
+  );
+  const genre = <span className="search-result">{result.genre} (genre)</span>;
 
   return (
-    <span className="search-results" key={index}>
-      {result.typeOfQuery === 'title'
-        ? book
+    <>
+      {result.typeOfQuery === 'genre'
+        ? genre
         : result.typeOfQuery === 'author'
         ? author
         : result.typeOfQuery === 'series'
         ? series
         : book}
-    </span>
+    </>
   );
 };
 
-export default SearchResult;
+const mapDispatchToProps = (dispatch) => ({
+  pushBookToBookPageState: (book) => dispatch(fetchBookPageBookSuccess(book)),
+  toggleSearchBar: () => dispatch(toggleSearchBar()),
+});
+
+export default connect(null, mapDispatchToProps)(SearchResult);

@@ -1,5 +1,11 @@
 import { firestore } from '../../firebase/firebase';
 
+export const toggleSearchBar = () => {
+  return {
+    type: 'TOGGLE_SEARCH_BAR',
+  };
+};
+
 export const fetchSearchStart = () => {
   return {
     type: 'FETCH_SEARCH_START',
@@ -35,6 +41,7 @@ export const fetchSearchAsync = (searchValue) => {
     const seriesQuery = booksRef
       .where('series.name', '>=', searchValue)
       .where('series.name', '<=', searchValue + '\uf8ff');
+    // can only find a match in an array if the searchValue is 100% match
     const genreQuery = booksRef.where('tags', 'array-contains', searchValue);
 
     const queries = [titleQuery, authorQuery, seriesQuery, genreQuery];
@@ -49,10 +56,21 @@ export const fetchSearchAsync = (searchValue) => {
 
           querySnapshot.forEach((doc) => {
             const data = doc.data();
+            data.description = data.description.split('*');
 
-            if (queryTypes[i] !== 'title') {
-              if (baseQueryResults.includes(data[queryTypes[i]]) === false) {
-                baseQueryResults.push(data[queryTypes[i]]);
+            if (queryTypes[i] === 'author') {
+              if (!baseQueryResults.includes(data.author)) {
+                baseQueryResults.push(data.author);
+              }
+            } else if (queryTypes[i] === 'series') {
+              if (!baseQueryResults.includes(data.series.name)) {
+                baseQueryResults.push(data.series.name);
+              }
+            } else if (queryTypes[i] === 'genre') {
+              /* we can use searchValue due the the limit of firebase queries for arrays will only
+              return a doc based on a full match within an array. */
+              if (!baseQueryResults.includes(searchValue)) {
+                baseQueryResults.push(searchValue);
               }
             }
             bookResults.push(data);
@@ -64,10 +82,11 @@ export const fetchSearchAsync = (searchValue) => {
               [queryTypes[i]]: current,
             };
           });
+          console.log(baseQueryResults);
 
-          const result = baseQueryResults.concat(bookResults);
+          const results = baseQueryResults.concat(bookResults);
 
-          resolve(result);
+          resolve(results);
           reject(new Error('promise failed'));
         });
       }).then();

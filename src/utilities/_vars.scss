@@ -1,2 +1,18 @@
 $primary-font: 'Open Sans';
 $secondary-font: 'Roboto';
+$blur: blur;
+
+@keyframes blur {
+  0% {
+    filter: blur(0px);
+    -webkit-filter: blur(0px);
+  }
+  50% {
+    filter: blur(8px);
+    -webkit-filter: blur(8px);
+  }
+  100% {
+    filter: blur(0px);
+    -webkit-filter: blur(0px);
+  }
+}

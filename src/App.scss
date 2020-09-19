@@ -1,15 +1,18 @@
 //  normalize styles
 @use './normalize';
+// utils
+@use '../src/utilities/styles.scss';
 // page styles
 @use '../src/pages/Home/home.styles';
 @use '../src/pages/CreateBook/createBook.styles';
 @use '../src/pages/404/fourZeroFour.styles';
+@use '../src/pages/bookPage/bookPage.styles';
 // component styles
 @use '../src/components/nav/navDesktop/navDesktop.styles';
 @use '../src/components/searchBar/searchBar.styles';
 @use '../src/components/logo/logo.styles';
 @use '../src/components/introBlock/introBlock.styles';
-@use '../src/components/introFeatureItem/introFeatureItem.styles';
+@use '../src/components/fullBook/fullBook.styles';
 @use '../src/components/generalBtn/generalBtn.styles';
 @use '../src/components//carouseltem/carouselItem.styles';
 @use '../src/components/itemCarousel/itemCarousel.styles';
@@ -18,9 +21,8 @@
 @use '../src/components/audioPlayer/audioPlayer.styles';
 @use '../src/components/loader/loader.styles';
 @use '../src/components/appLoader/appLoader.styles';
-
-// utils
-@use '../src/utilities/styles';
+@use '../src/components/searchResult/searchResult.styles';
+@use '../src/components/errorBoundary/error-boundary.styles';
 
 .App {
   background-color: black;
@@ -32,6 +34,11 @@
     color: unset;
   }
   overflow: hidden; /* Hide horizontal scrollbar */
+}
+
+.suspense-container {
+  height: 100vh;
+  background-color: black;
 }
 
 body {

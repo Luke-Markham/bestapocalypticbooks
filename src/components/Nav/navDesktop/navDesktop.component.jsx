@@ -9,7 +9,10 @@ const NavDesktop = ({ saveNavHeightValue }) => {
   const [enableBkg, setEnableBkg] = useState(false);
   const navRef = useRef(null);
   useEffect(() => {
-    saveNavHeightValue(navRef.current.clientHeight);
+    setTimeout(() => {
+      console.log(navRef.current.clientHeight);
+      saveNavHeightValue(navRef.current.clientHeight);
+    }, 250);
     window.addEventListener('scroll', function () {
       if (window.scrollY !== 0) {
         setEnableBkg(true);
@@ -24,7 +27,7 @@ const NavDesktop = ({ saveNavHeightValue }) => {
 
   return (
     <nav
-      className={`desktop-nav ${enableBkg ? 'nav-scroll-bkg' : ''} `}
+      className={`desktop-nav ${enableBkg ? ' nav-scroll-bkg' : ''} `}
       ref={navRef}
     >
       <Logo />
@@ -34,7 +37,6 @@ const NavDesktop = ({ saveNavHeightValue }) => {
         <NavLink to="/about">About</NavLink>
         <NavLink to="/contact">Contact</NavLink>
       </ul>
-
       <SearchBar />
     </nav>
   );

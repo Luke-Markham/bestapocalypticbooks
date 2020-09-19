@@ -1,0 +1,16 @@
+.error-boundary-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.error-boundary-image {
+  width: 10em;
+  height: 10em;
+}
+
+.error-boundary-text {
+  color: White;
+}

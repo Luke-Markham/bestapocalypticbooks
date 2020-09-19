@@ -1,7 +1,6 @@
 @use '../../utilities/styles';
 
-.feature-item-container {
-  margin-top: auto;
+.full-book-container {
   display: grid;
   grid-gap: 1.5em;
   grid-template-columns: 60% 40%;
@@ -12,12 +11,12 @@
   width: 80%;
 }
 
-.feature-item-img-container {
+.full-book-img-container {
   grid-area: featureImg;
   align-self: center;
   justify-self: center;
 
-  .feature-item-img {
+  .full-book-img {
     max-width: 100%;
     height: auto;
     -webkit-box-shadow: -15px 15px 5px -6px rgba(0, 0, 0, 0.479);
@@ -26,10 +25,10 @@
   }
 }
 
-.feature-item-description-container {
+.full-book-description-container {
   grid-area: featureDesc;
   color: white;
-  .feature-item-title {
+  .full-book-title {
     text-transform: capitalize;
     @include styles.secFontBold;
     font-size: 4em;
@@ -38,12 +37,12 @@
       margin: 0;
     }
   }
-  .feature-item-author {
+  .full-book-author {
     font-size: 0.9em;
     margin-bottom: 0.75em;
     text-transform: capitalize;
   }
-  .feature-item-blurb {
+  .full-book-blurb {
     font-size: 1.2em;
     @include styles.media(1500) {
       font-size: 1.5em;

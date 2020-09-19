@@ -1,4 +1,5 @@
 const INITIAL_STATE = {
+  isSearchBarOpen: false,
   isSearching: false,
   searchResults: [],
   errorMessage: undefined,
@@ -6,6 +7,11 @@ const INITIAL_STATE = {
 
 const searchReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
+    case 'TOGGLE_SEARCH_BAR':
+      return {
+        ...state,
+        isSearchBarOpen: !state.isSearchBarOpen,
+      };
     case 'FETCH_SEARCH_START':
       return {
         ...state,

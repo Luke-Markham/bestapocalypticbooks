@@ -26,3 +26,19 @@ export function cacheImage(srcArray, setIsLoading) {
 
   setIsLoading(false);
 }
+
+export function camelize(str) {
+  return str
+    .replace(/(?:^\w|[A-Z]|\b\w)/g, function (word, index) {
+      return index === 0 ? word.toLowerCase() : word.toUpperCase();
+    })
+    .replace(/\s+/g, '');
+}
+
+export function dashlize(str) {
+  return str.replace(/\s/g, '-');
+}
+
+export function dedashlize(str) {
+  return str.split('-').join(' ');
+}

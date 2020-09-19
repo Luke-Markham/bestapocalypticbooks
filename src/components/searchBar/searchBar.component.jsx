@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import {
   fetchSearchAsync,
   fetchSearchSuccess,
   fetchSearchStart,
+  toggleSearchBar,
 } from '../../redux/search/searchActions';
 import SearchIcon from '../../assets/svg/search.svg';
 import CloseIcon from '../../assets/svg/close.svg';
+import SearchResult from '../searchResult/searchResult.component';
 
 const SearchBar = ({
   fetchSearchAsync,
@@ -14,30 +17,25 @@ const SearchBar = ({
   startSearching,
   searchResults,
   isSearching,
+  isSearchBarOpen,
+  toggleSearchBar,
 }) => {
-  const [openSearchInput, setOpenSearchInput] = useState(false);
   const [searchValue, setSearchValue] = useState('');
   const [typingTimer, setTypingTimer] = useState();
-
+  const history = useHistory();
   function handleChange(e) {
     setSearchValue(e.target.value);
     startSearching();
   }
 
-  function handleSearchIconClick() {
-    if (openSearchInput === false) {
-      setOpenSearchInput(true);
-    }
-  }
-
   return (
     <div className="search-container">
       <div className="search-bar-container">
-        {openSearchInput ? null : (
+        {isSearchBarOpen ? null : (
           <div
-            onClick={() => handleSearchIconClick()}
+            onClick={() => toggleSearchBar()}
             className={`search-bar-icon-container ${
-              openSearchInput ? 'search-bar-icon-bkg' : ''
+              isSearchBarOpen ? 'search-bar-icon-bkg' : ''
             }`}
           >
             <img
@@ -49,7 +47,7 @@ const SearchBar = ({
         )}
         <input
           className={`search-bar-input ${
-            openSearchInput ? 'search-bar-input-open' : ''
+            isSearchBarOpen ? 'search-bar-input-open' : ''
           }`}
           type="text"
           placeholder="Titles, Authors, Series, Genre"
@@ -70,18 +68,18 @@ const SearchBar = ({
         />
         <div
           onClick={() => {
-            setOpenSearchInput(false);
+            toggleSearchBar();
             setSearchValue('');
           }}
           className={`search-bar-icon-container ${
-            openSearchInput ? 'search-bar-icon-bkg' : ''
+            isSearchBarOpen ? 'search-bar-icon-bkg' : ''
           }`}
         >
           <img
             src={CloseIcon}
             alt="Close Icon"
             className={`search-bar-search-close ${
-              openSearchInput ? 'search-bar-search-close-show' : ''
+              isSearchBarOpen ? 'search-bar-search-close-show' : ''
             }`}
           />
         </div>
@@ -94,14 +92,13 @@ const SearchBar = ({
         ) : searchValue && searchResults.length > 0 ? (
           searchResults.map((result, index) => {
             return (
-              <span className="search-results" key={index}>
-                {result.title} - {result.author}{' '}
-                {result.series ? '(' + result.series.name + ')' : null}
-              </span>
+              <SearchResult
+                setSearchValue={setSearchValue}
+                history={history}
+                result={result}
+                key={index}
+              />
             );
-            {
-              /* return <SearchResult result={result} index={index} />; */
-            }
           })
         ) : null}
       </div>
@@ -110,14 +107,16 @@ const SearchBar = ({
 };
 
 const mapDispatchToProps = (dispatch) => ({
+  toggleSearchBar: () => dispatch(toggleSearchBar()),
   fetchSearchAsync: (searchValue) => dispatch(fetchSearchAsync(searchValue)),
-  resetSearch: (searchResults) => dispatch(fetchSearchSuccess(searchResults)),
+  resetSearch: (booleanFalse) => dispatch(fetchSearchSuccess(booleanFalse)),
   startSearching: () => dispatch(fetchSearchStart()),
 });
 
 const mapStateToProps = ({ search }) => ({
   searchResults: search.searchResults,
   isSearching: search.isSearching,
+  isSearchBarOpen: search.isSearchBarOpen,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchBar);

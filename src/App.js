@@ -5,15 +5,8 @@ import { fetchFeaturedBookAsync } from './redux/featuredBook/featuredBookActions
 import { cacheImage } from './utilities/funcs';
 import mainBkg from '../src/assets/png/IntroBkg-min.png';
 import './App.scss';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect,
-  useParams,
-} from 'react-router-dom';
+import { Router, Switch, Route, Redirect } from 'react-router-dom';
 import AppLoader from './components/appLoader/appLoader.component';
-import IntroFeatureItem from './components/introFeatureItem/introFeatureItem.component';
 
 const customHistory = createBrowserHistory();
 
@@ -28,7 +21,11 @@ const CreateBook = React.lazy(() =>
 );
 const FourZeroFour = React.lazy(() => import('./pages/404/404.component'));
 
-const Home = React.lazy(() => import('./pages/Home/home.component'));
+const HomePage = React.lazy(() => import('./pages/Home/home.component'));
+
+const BookPage = React.lazy(() =>
+  import('./pages/BookPage/bookPage.component')
+);
 
 function App({ fetchFeaturedBookAsync }) {
   const [isLoading, setIsLoading] = useState(true);
@@ -46,21 +43,21 @@ function App({ fetchFeaturedBookAsync }) {
         <AppLoader />
       ) : (
         <Router history={customHistory}>
-          <Suspense fallback={<AppLoader />}>
-            <NavDesktop />
-            <ErrorBoundary>
+          <Suspense fallback={<div className="suspense-container" />}>
+            <ErrorBoundary history={customHistory}>
+              <NavDesktop />
               <Switch>
                 <Route exact path="/">
                   <Redirect to="/home" />
                 </Route>
-                <Route exact path="/home">
-                  <Home />
+                <Route path="/home">
+                  <HomePage />
                 </Route>
                 <Route exact path="/create">
                   <CreateBook />
                 </Route>
-                <Route path="/:id">
-                  <IntroFeatureItem />
+                <Route exact path="/books/:id">
+                  <BookPage />
                 </Route>
                 <Route path="*">
                   <FourZeroFour />

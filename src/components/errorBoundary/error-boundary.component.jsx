@@ -1,10 +1,18 @@
 import React from 'react';
+
 class ErrorBoundary extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       hasErrored: false,
     };
+  }
+
+  handleGoBack() {
+    this.props.history.goBack();
+    setTimeout(() => {
+      window.location.reload();
+    }, 100);
   }
 
   static getDerivedStateFromError(error) {
@@ -20,8 +28,16 @@ class ErrorBoundary extends React.Component {
     if (this.state.hasErrored) {
       return (
         <div className="error-boundary-container">
-          <img src="https://i.imgur.com/yW2W9SC.png" alt="broke page" />
-          <p>Sorry, this page is broken!</p>
+          <img
+            className="error-boundary-image"
+            src="https://i.imgur.com/yW2W9SC.png"
+            alt="broke page"
+          />
+          <p className="error-boundary-text">
+            Sorry, this page is broken! Please go back
+            <br />
+            <span onClick={() => this.handleGoBack()}>X0x0</span>
+          </p>
         </div>
       );
     }

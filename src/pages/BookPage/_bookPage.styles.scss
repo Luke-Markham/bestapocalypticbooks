@@ -1,0 +1,9 @@
+.book-page-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  & .feature-item-container {
+    margin: 0;
+  }
+}

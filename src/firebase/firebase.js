@@ -2,7 +2,7 @@ import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
 import 'firebase/storage';
-
+import { camelize } from '../utilities/funcs';
 // Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: 'AIzaSyDGP--Y0PXYunox7TXU8XmwknSed1mZjRc',
@@ -22,15 +22,6 @@ firebase.initializeApp(firebaseConfig);
 export const firestore = firebase.firestore();
 export const auth = firebase.auth();
 export const storage = firebase.storage();
-
-// Helper function for camelCase string
-function camelize(str) {
-  return str
-    .replace(/(?:^\w|[A-Z]|\b\w)/g, function (word, index) {
-      return index === 0 ? word.toLowerCase() : word.toUpperCase();
-    })
-    .replace(/\s+/g, '');
-}
 
 export async function getBook(title) {
   const docRef = firestore.collection('books').doc(title);
