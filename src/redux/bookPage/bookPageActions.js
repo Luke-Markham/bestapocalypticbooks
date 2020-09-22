@@ -1,5 +1,5 @@
 import { firestore } from '../../firebase/firebase';
-import { camelize } from '../../utilities/funcs';
+import { camelize, dedashlize } from '../../utilities/funcs';
 
 export const fetchBookPageBookStart = () => {
   return {
@@ -22,7 +22,7 @@ export const fetchBookPageBookFailure = (errorMessage) => {
 };
 
 export const fetchBookPageBookAsync = (title) => {
-  const titleCameled = camelize(title);
+  const titleCameled = camelize(dedashlize(title));
   return (dispatch) => {
     fetchBookPageBookStart();
     const docRef = firestore.collection('books').doc(titleCameled);

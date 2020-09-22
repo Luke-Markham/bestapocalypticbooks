@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { fetchBookPageBookSuccess } from '../../redux/bookPage/bookPageActions';
 import { toggleSearchBar } from '../../redux/search/searchActions';
@@ -7,14 +7,16 @@ import { dashlize } from '../../utilities/funcs';
 
 const SearchResult = ({
   result,
+  clearPreviousBookPagBookState,
   pushBookToBookPageState,
   toggleSearchBar,
   setSearchValue,
   history,
 }) => {
-  const handleTitleClick = () => {
+  const handleTitleClick = async () => {
+    await clearPreviousBookPagBookState(null);
+    history.push(`/books/${dashlize(result.title)}`);
     pushBookToBookPageState(result);
-    history.push(`books/${dashlize(result.title)}`);
     toggleSearchBar();
     setSearchValue('');
   };
@@ -47,6 +49,8 @@ const SearchResult = ({
 };
 
 const mapDispatchToProps = (dispatch) => ({
+  clearPreviousBookPagBookState: (clearValue) =>
+    dispatch(fetchBookPageBookSuccess(clearValue)),
   pushBookToBookPageState: (book) => dispatch(fetchBookPageBookSuccess(book)),
   toggleSearchBar: () => dispatch(toggleSearchBar()),
 });

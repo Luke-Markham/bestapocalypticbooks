@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
+import { useLocation } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { saveNavHeightValue } from '../../../redux/nav/navActions';
 import { NavLink } from 'react-router-dom';
@@ -8,11 +9,14 @@ import SearchBar from '../../searchBar/searchBar.component';
 const NavDesktop = ({ saveNavHeightValue }) => {
   const [enableBkg, setEnableBkg] = useState(false);
   const navRef = useRef(null);
+  const location = useLocation();
   useEffect(() => {
-    setTimeout(() => {
-      console.log(navRef.current.clientHeight);
-      saveNavHeightValue(navRef.current.clientHeight);
-    }, 250);
+    if (location.pathname === '/home') {
+      setTimeout(() => {
+        console.log(navRef.current.clientHeight);
+        saveNavHeightValue(navRef.current.clientHeight);
+      }, 250);
+    }
     window.addEventListener('scroll', function () {
       if (window.scrollY !== 0) {
         setEnableBkg(true);
@@ -23,7 +27,7 @@ const NavDesktop = ({ saveNavHeightValue }) => {
     return () => {
       window.removeEventListener('scroll', null);
     };
-  }, [saveNavHeightValue]);
+  }, [location, saveNavHeightValue]);
 
   return (
     <nav

@@ -13,7 +13,14 @@ const FullBook = ({ isFetching, book }) => {
           <Fade left duration={1000} delay={250}>
             <div className="full-book-description-container">
               <h3 className="full-book-title">{book.title}</h3>
-              <p className="full-book-author">{book.author}</p>
+              <div className="full-book-author-and-series-container">
+                <p className="full-book-author">{book.author}</p>
+                {book.series ? (
+                  <p className="full-book-series">
+                    (Book {book.series.number} {book.series.name})
+                  </p>
+                ) : null}
+              </div>
               <p className="full-book-blurb">{handleDesc(book.description)}</p>
             </div>
           </Fade>

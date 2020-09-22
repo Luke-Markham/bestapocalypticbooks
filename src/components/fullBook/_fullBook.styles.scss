@@ -11,20 +11,6 @@
   width: 80%;
 }
 
-.full-book-img-container {
-  grid-area: featureImg;
-  align-self: center;
-  justify-self: center;
-
-  .full-book-img {
-    max-width: 100%;
-    height: auto;
-    -webkit-box-shadow: -15px 15px 5px -6px rgba(0, 0, 0, 0.479);
-    -moz-box-shadow: -15px 15px 5px -6px rgba(0, 0, 0, 0.479);
-    box-shadow: -15px 15px 5px -6px rgba(0, 0, 0, 0.479);
-  }
-}
-
 .full-book-description-container {
   grid-area: featureDesc;
   color: white;
@@ -37,16 +23,39 @@
       margin: 0;
     }
   }
-  .full-book-author {
+
+  .full-book-author-and-series-container {
+    display: flex;
+  }
+  .full-book-author,
+  .full-book-series {
+    margin-top: 0.5em;
     font-size: 0.9em;
     margin-bottom: 0.75em;
     text-transform: capitalize;
+  }
+  .full-book-series {
+    margin-left: 0.5em;
   }
   .full-book-blurb {
     font-size: 1.2em;
     @include styles.media(1500) {
       font-size: 1.5em;
     }
+  }
+}
+
+.full-book-img-container {
+  grid-area: featureImg;
+  align-self: center;
+  justify-self: center;
+
+  .full-book-img {
+    max-width: 100%;
+    height: auto;
+    -webkit-box-shadow: -15px 15px 5px -6px rgba(0, 0, 0, 0.479);
+    -moz-box-shadow: -15px 15px 5px -6px rgba(0, 0, 0, 0.479);
+    box-shadow: -15px 15px 5px -6px rgba(0, 0, 0, 0.479);
   }
 }
 

@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { handleDesc } from '../../utilities/funcs';
 import GeneralBtn from '../generalBtn/generalBtn.component';
-import one from '../../assets/png/test-1.jpg';
-import two from '../../assets/png/test-2.jpg';
-import three from '../../assets/png/test-3.jpg';
 import AudioPlayer from '../audioPlayer/audioPlayer.component';
 import close from '../../assets/svg/close.svg';
 
@@ -23,13 +20,13 @@ const Highlight = ({ book, handleOpenHighlight, setActiveItem }) => {
   useEffect(() => {
     switch (Math.floor(Math.random() * 3) + 1) {
       case 1:
-        setPath(one);
+        setPath(require('../../assets/png/test-1.jpg'));
         break;
       case 2:
-        setPath(two);
+        setPath(require('../../assets/png/test-2.jpg'));
         break;
       case 3:
-        setPath(three);
+        setPath(require('../../assets/png/test-3.jpg'));
         break;
       default:
         break;
@@ -45,7 +42,14 @@ const Highlight = ({ book, handleOpenHighlight, setActiveItem }) => {
     >
       <div className="highlight-details-container">
         <h2 className="highlight-title">{title}</h2>
-        <p className="highlight-author">{author}</p>
+        <div className="highlight-author-and-series-container">
+          <p className="highlight-author">{author}</p>
+          {series ? (
+            <p className="highlight-series">
+              (Book {series.number} {series.name})
+            </p>
+          ) : null}
+        </div>
         <p className="highlight-blurb">{handleDesc(description)}</p>
         <div className="highlight-buttons-and-audio-container">
           <GeneralBtn

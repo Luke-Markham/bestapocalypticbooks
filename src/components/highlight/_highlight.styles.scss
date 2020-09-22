@@ -13,27 +13,37 @@
 
 .highlight-details-container {
   width: 50%;
-}
 
-.highlight-title {
-  @include styles.secFontBold;
-  font-size: 2em;
-  @include styles.media(1200) {
-    font-size: 3em;
-    margin: 0;
+  .highlight-title {
+    text-transform: capitalize;
+    @include styles.secFontBold;
+    font-size: 2em;
+    @include styles.media(1200) {
+      font-size: 3em;
+      margin: 0;
+    }
   }
-}
 
-.highlight-author {
-  font-size: 0.9em;
-  margin-bottom: 0.75em;
-}
+  .highlight-author-and-series-container {
+    display: flex;
+  }
 
-.highlight-blurb {
-  width: 90%;
-  font-size: 1.2em;
-  @include styles.media(1500) {
-    font-size: 1.5em;
+  .highlight-author,
+  .highlight-series {
+    margin-top: 0.5em;
+    font-size: 0.9em;
+    margin-bottom: 0.75em;
+    text-transform: capitalize;
+  }
+  .highlight-series {
+    margin-left: 0.5em;
+  }
+  .highlight-blurb {
+    width: 90%;
+    font-size: 1.2em;
+    @include styles.media(1500) {
+      font-size: 1.5em;
+    }
   }
 }
 

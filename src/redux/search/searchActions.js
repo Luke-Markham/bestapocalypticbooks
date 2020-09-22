@@ -82,7 +82,6 @@ export const fetchSearchAsync = (searchValue) => {
               [queryTypes[i]]: current,
             };
           });
-          console.log(baseQueryResults);
 
           const results = baseQueryResults.concat(bookResults);
 
