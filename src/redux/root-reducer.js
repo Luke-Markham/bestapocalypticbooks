@@ -4,6 +4,7 @@ import carouselBooksReducer from './carousel/carouselReducer';
 import navReducer from './nav/navReducer';
 import searchReducer from './search/searchReducer';
 import bookPageReducer from './bookPage/bookPageReducer';
+import authorPageReducer from './authorPage/authorPageReducer';
 
 export default combineReducers({
   featuredBook: featuredBookReducer,
@@ -11,4 +12,5 @@ export default combineReducers({
   nav: navReducer,
   search: searchReducer,
   bookPage: bookPageReducer,
+  authorPage: authorPageReducer,
 });

@@ -24,7 +24,9 @@ export function cacheImage(srcArray, setIsLoading) {
     });
   });
 
-  setIsLoading(false);
+  if (setIsLoading !== undefined) {
+    setIsLoading(false);
+  }
 }
 
 export function camelize(str) {

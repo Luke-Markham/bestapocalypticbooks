@@ -1,11 +1,17 @@
 import React from 'react';
-import { handleDesc } from '../../utilities/funcs';
-
+import { handleDesc, dashlize } from '../../utilities/funcs';
+import { useLocation, useHistory } from 'react-router-dom';
 import Fade from 'react-reveal/Fade';
 import GeneralBtn from '../generalBtn/generalBtn.component';
 import AudioPlayer from '../audioPlayer/audioPlayer.component';
 
 const FullBook = ({ isFetching, book }) => {
+  const location = useLocation().pathname;
+  const history = useHistory();
+  const handleMoreInfo = () => {
+    history.push(`/books/${dashlize(book.title)}`);
+  };
+
   return (
     <div className="full-book-container">
       {isFetching || !book ? null : (
@@ -50,7 +56,14 @@ const FullBook = ({ isFetching, book }) => {
                 text="Paperback"
                 link={book.links.paperback}
               />
-              <GeneralBtn colorClass="more-info" text="More Info" />
+              {location === '/home' ? (
+                <GeneralBtn
+                  colorClass="more-info"
+                  text="More Info"
+                  func={handleMoreInfo}
+                />
+              ) : null}
+
               <AudioPlayer audioSrc={book.audio} />
             </div>
           </Fade>

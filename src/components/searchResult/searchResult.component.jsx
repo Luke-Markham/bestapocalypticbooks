@@ -1,39 +1,56 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { fetchBookPageBookSuccess } from '../../redux/bookPage/bookPageActions';
-import { toggleSearchBar } from '../../redux/search/searchActions';
-import { dashlize } from '../../utilities/funcs';
 
 const SearchResult = ({
+  handleSearchResultSelection,
   result,
-  clearPreviousBookPagBookState,
-  pushBookToBookPageState,
-  toggleSearchBar,
-  setSearchValue,
-  history,
+  index,
+  cursorPosition,
 }) => {
-  const handleTitleClick = async () => {
-    await clearPreviousBookPagBookState(null);
-    history.push(`/books/${dashlize(result.title)}`);
-    pushBookToBookPageState(result);
-    toggleSearchBar();
-    setSearchValue('');
-  };
   const book = (
-    <span className="search-result" onClick={() => handleTitleClick()}>
+    <span
+      className={`search-result ${
+        cursorPosition === index ? 'search-result-active' : ''
+      }`}
+      onClick={() => handleSearchResultSelection(result)}
+      onKeyDown={(e) => {
+        console.log(e);
+      }}
+    >
       {result.title} - {result.author}{' '}
       {result.series ? '(' + result.series.name + ')' : null}
     </span>
   );
 
   const author = (
-    <span className="search-result">{result.author} (Author)</span>
+    <span
+      className={`search-result ${
+        cursorPosition === index ? 'search-result-active' : ''
+      }`}
+      onClick={() => handleSearchResultSelection(result)}
+    >
+      {result.author} (Author)
+    </span>
   );
   const series = (
-    <span className="search-result">{result.series} (Series)</span>
+    <span
+      className={`search-result ${
+        cursorPosition === index ? 'search-result-active' : ''
+      }`}
+      onClick={() => handleSearchResultSelection(result)}
+    >
+      {result.series} (Series)
+    </span>
   );
-  const genre = <span className="search-result">{result.genre} (genre)</span>;
+  const genre = (
+    <span
+      className={`search-result ${
+        cursorPosition === index ? 'search-result-active' : ''
+      }`}
+      onClick={() => handleSearchResultSelection(result)}
+    >
+      {result.genre} (genre)
+    </span>
+  );
 
   return (
     <>
@@ -48,11 +65,4 @@ const SearchResult = ({
   );
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  clearPreviousBookPagBookState: (clearValue) =>
-    dispatch(fetchBookPageBookSuccess(clearValue)),
-  pushBookToBookPageState: (book) => dispatch(fetchBookPageBookSuccess(book)),
-  toggleSearchBar: () => dispatch(toggleSearchBar()),
-});
-
-export default connect(null, mapDispatchToProps)(SearchResult);
+export default SearchResult;

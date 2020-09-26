@@ -1,6 +1,8 @@
 import { firestore } from '../../firebase/firebase';
 import { camelize, dedashlize } from '../../utilities/funcs';
 
+// BOOK =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
 export const fetchBookPageBookStart = () => {
   return {
     type: 'FETCH_BOOK_PAGE_BOOK_START',
@@ -24,21 +26,81 @@ export const fetchBookPageBookFailure = (errorMessage) => {
 export const fetchBookPageBookAsync = (title) => {
   const titleCameled = camelize(dedashlize(title));
   return (dispatch) => {
-    fetchBookPageBookStart();
+    dispatch(fetchBookPageBookStart());
     const docRef = firestore.collection('books').doc(titleCameled);
-    let result;
-
+    let book;
     docRef
       .get()
       .then(function (doc) {
         if (doc.exists) {
-          result = doc.data();
-          result.description = result.description.split('*');
+          book = doc.data();
+          book.description = book.description.split('*');
         } else {
-          result = false;
+          book = false;
         }
-        dispatch(fetchBookPageBookSuccess(result));
+        dispatch(fetchBookPageBookSuccess(book));
       })
       .catch((error) => dispatch(fetchBookPageBookFailure(error.message)));
+  };
+};
+
+// RELATED BOOKS =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+export const fetchBookPageRelatedBooksStart = () => {
+  return {
+    type: 'FETCH_BOOK_PAGE_RELATED_BOOKS_START',
+  };
+};
+
+export const fetchBookPageRelatedBooksSuccess = (books) => {
+  return {
+    type: 'FETCH_BOOK_PAGE_RELATED_BOOKS_SUCCESS',
+    payload: books,
+  };
+};
+
+export const fetchBookPageRelatedBooksFailure = (errorMessage) => {
+  return {
+    type: 'FETCH_BOOK_PAGE_RELATED_BOOKS_FAILURE',
+    payload: errorMessage,
+  };
+};
+
+export const fetchBookPageRelatedBooksAsync = (title) => {
+  const titleSpaced = dedashlize(title);
+  return (dispatch) => {
+    dispatch(fetchBookPageRelatedBooksStart());
+    const docQuery = firestore
+      .collection('books')
+      .where('title', '==', titleSpaced)
+      .where('series.name', '>', '');
+
+    docQuery
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          if (doc.exists) {
+            const seriesName = doc.data().series.name;
+            const seriesQuery = firestore
+              .collection('books')
+              .where('series.name', '==', seriesName);
+
+            seriesQuery.get().then((querySnapshot2) => {
+              const relatedBooks = [];
+              querySnapshot2.forEach((doc2) => {
+                const book = doc2.data();
+                book.description = book.description.split('*');
+                if (book.title !== titleSpaced) {
+                  relatedBooks.push(book);
+                }
+              });
+              dispatch(fetchBookPageRelatedBooksSuccess(relatedBooks));
+            });
+          } else {
+            dispatch(fetchBookPageRelatedBooksSuccess(false));
+          }
+        });
+      })
+      .catch((error) => dispatch(fetchBookPageRelatedBooksFailure(error)));
   };
 };

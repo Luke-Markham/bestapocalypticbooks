@@ -1,11 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { handleDesc } from '../../utilities/funcs';
+import { handleDesc, dashlize } from '../../utilities/funcs';
+import { useHistory } from 'react-router-dom';
 import GeneralBtn from '../generalBtn/generalBtn.component';
 import AudioPlayer from '../audioPlayer/audioPlayer.component';
 import close from '../../assets/svg/close.svg';
 
 const Highlight = ({ book, handleOpenHighlight, setActiveItem }) => {
   const [path, setPath] = useState();
+
+  const history = useHistory();
+
+  const handleMoreInfo = () => {
+    history.push(`/books/${dashlize(book.title)}`);
+  };
+
   const {
     title,
     author,
@@ -63,8 +71,11 @@ const Highlight = ({ book, handleOpenHighlight, setActiveItem }) => {
             text="Paperback"
             link={links.paperback}
           />
-
-          <GeneralBtn colorClass="more-info" text="More info" link="#" />
+          <GeneralBtn
+            colorClass="more-info"
+            text="More info"
+            func={handleMoreInfo}
+          />
           <AudioPlayer audioSrc={audio} />
         </div>
         <div className="close-highlight-button-container">

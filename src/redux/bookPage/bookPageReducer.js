@@ -1,7 +1,10 @@
 const INITIAL_STATE = {
-  isFetching: false,
-  bookResult: null,
-  errorMessage: '',
+  isFetchingBook: false,
+  book: null,
+  bookErrorMessage: '',
+  isFetchingRelatedBooks: false,
+  relatedBooks: null,
+  relatedBooksErrorMessage: '',
 };
 
 const bookPageReducer = (state = INITIAL_STATE, action) => {
@@ -9,19 +12,36 @@ const bookPageReducer = (state = INITIAL_STATE, action) => {
     case 'FETCH_BOOK_PAGE_BOOK_START':
       return {
         ...state,
-        isFetching: true,
+        isFetchingBook: true,
       };
     case 'FETCH_BOOK_PAGE_BOOK_SUCCESS':
       return {
         ...state,
-        isFetching: false,
-        bookResult: action.payload,
+        isFetchingBook: false,
+        book: action.payload,
       };
     case 'FETCH_BOOK_PAGE_BOOK_FAILURE':
       return {
         ...state,
+        isFetchingBook: false,
+        bookErrorMessage: action.payload,
+      };
+    case 'FETCH_BOOK_PAGE_RELATED_BOOKS_START':
+      return {
+        ...state,
+        isFetchingRelatedBooks: true,
+      };
+    case 'FETCH_BOOK_PAGE_RELATED_BOOKS_SUCCESS':
+      return {
+        ...state,
+        isFetchingRelatedBooks: false,
+        relatedBooks: action.payload,
+      };
+    case 'FETCH_BOOK_PAGE_RELATED_BOOKS_FAILURE':
+      return {
+        ...state,
         isFetching: false,
-        errorMessage: action.payload,
+        relatedBooksErrorMessage: action.payload,
       };
 
     default:

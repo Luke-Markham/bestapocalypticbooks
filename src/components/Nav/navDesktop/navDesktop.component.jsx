@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { saveNavHeightValue } from '../../../redux/nav/navActions';
 import { NavLink } from 'react-router-dom';
 import Logo from '../../logo/logo.component';
-import SearchBar from '../../searchBar/searchBar.component';
+import Search from '../../search/search.component';
 
 const NavDesktop = ({ saveNavHeightValue }) => {
   const [enableBkg, setEnableBkg] = useState(false);
@@ -41,7 +41,7 @@ const NavDesktop = ({ saveNavHeightValue }) => {
         <NavLink to="/about">About</NavLink>
         <NavLink to="/contact">Contact</NavLink>
       </ul>
-      <SearchBar />
+      <Search/>
     </nav>
   );
 };

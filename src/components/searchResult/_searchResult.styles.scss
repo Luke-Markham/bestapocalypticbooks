@@ -10,3 +10,10 @@
     transition: all 0.2s ease-in;
   }
 }
+
+.search-result-active {
+  background-color: rgba(255, 255, 255, 0.8);
+  color: black;
+  cursor: pointer;
+  transition: all 0.2s ease-in;
+}

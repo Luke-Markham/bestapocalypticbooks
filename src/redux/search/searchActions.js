@@ -26,7 +26,7 @@ export const fetchSearchFailure = async (errorMessage) => {
   };
 };
 
-export const fetchSearchAsync = (searchValue) => {
+export const fetchSearchResultsAsync = (searchValue) => {
   searchValue = searchValue.toLowerCase();
   return (dispatch) => {
     // Dispatched onChange of search bar input to speed up the setting of state.search.isSearching
@@ -67,7 +67,7 @@ export const fetchSearchAsync = (searchValue) => {
                 baseQueryResults.push(data.series.name);
               }
             } else if (queryTypes[i] === 'genre') {
-              /* we can use searchValue due the the limit of firebase queries for arrays will only
+              /* we have to use the total searchValue due the the limit of firebase queries for arrays will only
               return a doc based on a full match within an array. */
               if (!baseQueryResults.includes(searchValue)) {
                 baseQueryResults.push(searchValue);
@@ -95,7 +95,6 @@ export const fetchSearchAsync = (searchValue) => {
 
     Promise.all(promises)
       .then((values) => {
-        console.log(values);
         let result = values.flat();
         if (result.length === 0) {
           result = false;

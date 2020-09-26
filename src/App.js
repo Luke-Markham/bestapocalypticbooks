@@ -27,6 +27,10 @@ const BookPage = React.lazy(() =>
   import('./pages/BookPage/bookPage.component')
 );
 
+const AuthorPage = React.lazy(() =>
+  import('./pages/AuthorPage/author-page.compnent')
+);
+
 function App({ fetchFeaturedBookAsync }) {
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
@@ -58,6 +62,9 @@ function App({ fetchFeaturedBookAsync }) {
                 </Route>
                 <Route exact path="/books/:id">
                   <BookPage />
+                </Route>
+                <Route exact path="/authors/:id">
+                  <AuthorPage />
                 </Route>
                 <Route path="*">
                   <FourZeroFour />

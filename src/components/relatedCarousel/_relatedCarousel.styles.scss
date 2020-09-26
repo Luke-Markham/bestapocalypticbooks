@@ -1,0 +1,57 @@
+@use '../../utilities/styles';
+
+.related-carousel-master-container {
+  width: 90%;
+}
+
+.related-carousel-container {
+  padding: 1em 0 0 0;
+
+  // overflow-y: visible !important;
+  -webkit-box-shadow: -15px 20px 35px -25px rgba(125, 125, 125, 0.5);
+  -moz-box-shadow: -15px 20px 35px -25px rgba(125, 125, 125, 0.5);
+  box-shadow: -15px 20px 35px -25px rgba(125, 125, 125, 0.5);
+}
+
+.related-carousel-item {
+  width: 90%;
+  height: auto;
+  // margin: 0 1em;
+}
+
+.related-carousel-series {
+  color: white;
+  @include styles.priFontBold;
+  padding: 1em 0 0em 1em;
+  font-size: 2em;
+  text-transform: capitalize;
+}
+
+.react-multiple-carousel__arrow {
+  border-radius: 0px !important;
+  background-color: rgba(0, 0, 0, 0.5) !important;
+  opacity: 1 !important;
+  &::before {
+    font-size: 30px !important;
+    @include styles.media(930) {
+      font-size: 40px !important;
+    }
+  }
+
+  @include styles.media(1080) {
+    background-color: rgba(0, 0, 0, 0.3) !important;
+    opacity: 0.5 !important;
+    &:hover {
+      opacity: 1 !important;
+      background-color: rgba(0, 0, 0, 0.6) !important;
+    }
+  }
+}
+
+.react-multiple-carousel__arrow--left {
+  left: 1% !important;
+}
+
+.react-multiple-carousel__arrow--right {
+  right: 1% !important;
+}
