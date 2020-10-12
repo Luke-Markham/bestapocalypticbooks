@@ -68,12 +68,12 @@ function App({ fetchFeaturedBookAsync }) {
         <Router history={customHistory}>
           <Suspense fallback={<div className="suspense-container" />}>
             <ErrorBoundary history={customHistory}>
-              <MobileMediaQuery>
-                <NavMobile />
-              </MobileMediaQuery>
               <TabletOrDesktopMediaQuery>
                 <NavDesktop />
               </TabletOrDesktopMediaQuery>
+              <MobileMediaQuery>
+                <NavMobile />
+              </MobileMediaQuery>
 
               <Switch>
                 <Route exact path="/">

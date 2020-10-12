@@ -19,6 +19,8 @@ const NavMobile = ({
   const navRef = React.useRef(null);
   const location = useLocation();
 
+  const [enableBkg, setEnableBkg] = React.useState(false);
+
   React.useEffect(() => {
     if (location.pathname === '/home' || location.pathname.includes('/books')) {
       setTimeout(() => {
@@ -26,10 +28,28 @@ const NavMobile = ({
         saveNavHeightValue(navRef.current.clientHeight);
       }, 250);
     }
-  }, [location, saveNavHeightValue]);
+    window.addEventListener('scroll', function () {
+      if (window.scrollY !== 0) {
+        setEnableBkg(true);
+      } else {
+        setEnableBkg(false);
+      }
+    });
+    return () => {
+      window.removeEventListener('scroll', null);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location]);
 
   return (
-    <nav className="mobile-nav" ref={navRef}>
+    <nav
+      className={`${
+        enableBkg || openNav || isSearchBarOpen
+          ? 'mobile-nav nav-scroll-bkg'
+          : 'mobile-nav'
+      }`}
+      ref={navRef}
+    >
       <div className="mobile-nav-top-bar-container">
         <Logo />
         <div className="hamburger-and-search-icon-container">

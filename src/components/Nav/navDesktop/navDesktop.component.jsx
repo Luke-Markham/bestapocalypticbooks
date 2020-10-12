@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React from 'react';
 import { useLocation } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { saveNavHeightValue } from '../../../redux/nav/navActions';
@@ -7,10 +7,11 @@ import Logo from '../../logo/logo.component';
 import Search from '../../search/search.component';
 
 const NavDesktop = ({ saveNavHeightValue }) => {
-  const [enableBkg, setEnableBkg] = useState(false);
-  const navRef = useRef(null);
+  const [enableBkg, setEnableBkg] = React.useState(false);
+  const navRef = React.useRef(null);
   const location = useLocation();
-  useEffect(() => {
+
+  React.useEffect(() => {
     if (location.pathname === '/home' || location.pathname.includes('/books')) {
       setTimeout(() => {
         console.log(navRef.current.clientHeight);
@@ -20,18 +21,19 @@ const NavDesktop = ({ saveNavHeightValue }) => {
     window.addEventListener('scroll', function () {
       if (window.scrollY !== 0) {
         setEnableBkg(true);
-      } else if (window.screenY === 0) {
+      } else {
         setEnableBkg(false);
       }
     });
     return () => {
       window.removeEventListener('scroll', null);
     };
-  }, [location, saveNavHeightValue]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location]);
 
   return (
     <nav
-      className={`desktop-nav ${enableBkg ? ' nav-scroll-bkg' : ''} `}
+      className={`${enableBkg ? 'desktop-nav nav-scroll-bkg' : 'desktop-nav'}`}
       ref={navRef}
     >
       <Logo />
