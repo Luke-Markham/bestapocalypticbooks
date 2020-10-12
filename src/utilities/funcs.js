@@ -1,11 +1,23 @@
 import React from 'react';
 
-export function handleDesc(description, length) {
+export function handleDesc(description, modifier) {
+  if (modifier === 'highlight') {
+    description = description.substr(0, 519);
+    const lastSpace = description.lastIndexOf(' ');
+    description = description.substr(0, lastSpace);
+    description = description.split('*');
+  } else {
+    description = description.split('*');
+  }
   return description.map((desc, index) => {
     return (
       <span key={index}>
         {desc}
-        {index === description.length - 1 ? '..' : ''}
+        {index === description.length - 1 && modifier === 'highlight'
+          ? '...'
+          : index === description.length - 1
+          ? '..'
+          : ''}
         <br />
         <br />
       </span>

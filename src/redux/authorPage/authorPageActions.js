@@ -33,7 +33,6 @@ export const fetchAuthorPageBooksAsync = (author) => {
         const books = [];
         querySnapshot.forEach((doc) => {
           const data = doc.data();
-          data.description = data.description.split('*');
           books.push(data);
         });
         dispatch(fetchAuthorPageBooksSuccess(books));

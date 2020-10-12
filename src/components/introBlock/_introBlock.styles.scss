@@ -4,7 +4,7 @@
   background-color: black;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   height: 100vh;
   background-image: linear-gradient(
@@ -22,14 +22,16 @@
   background-size: cover;
 
   & .full-book-container {
-    margin-top: auto;
+    margin-top: 5em;
+    @include styles.media(1040) {
+      margin-top: 10em;
+    }
   }
 }
 
 .intro-block-down-arrow {
   cursor: pointer;
-  width: 2.5em;
-  margin-top: 5.5em;
+  width: 3.5em;
   margin-bottom: 1em;
   animation: slideDown 0.8s 1.2s linear 3 backwards;
   transition: all 0.4s;

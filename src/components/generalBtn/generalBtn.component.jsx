@@ -1,11 +1,11 @@
 import React from 'react';
 
-const GeneralBtn = ({ colorClass, text, link, func }) => {
+const GeneralBtn = ({ colorClass, text, link, func, type }) => {
   return (
     <button
-      id="general-btn"
-      className={colorClass}
+      className={colorClass + ' general-btn'}
       onClick={func ? func : null}
+      type={type ? type : null}
     >
       <a href={link} target="_blank" rel="noopener noreferrer">
         {text}

@@ -1,12 +1,52 @@
+@use '../../utilities/styles';
+
 .book-page-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  & .full-book-container {
+    margin: auto;
+  }
+}
+
+.book-page-book-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   min-height: 100vh;
+  width: 100%;
   background-repeat: no-repeat;
   background-size: cover;
-  & .full-book-container {
-    margin: 10em 0 0 0;
+  background-position: center;
+}
+
+.book-page-related-down-arrow {
+  cursor: pointer;
+  width: 2.5em;
+  animation: slideDown 0.8s 1.2s linear 3 backwards;
+  transition: all 0.4s;
+  opacity: 0.5;
+  @include styles.media(1200) {
+    width: 5em;
+  }
+  &:hover {
+    opacity: 1;
+  }
+}
+
+@keyframes slideDown {
+  0% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(10%);
+  }
+  100% {
+    opacity: 0;
   }
 }

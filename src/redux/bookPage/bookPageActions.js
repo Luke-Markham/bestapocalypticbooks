@@ -34,7 +34,6 @@ export const fetchBookPageBookAsync = (title) => {
       .then(function (doc) {
         if (doc.exists) {
           book = doc.data();
-          book.description = book.description.split('*');
         } else {
           book = false;
         }
@@ -89,11 +88,9 @@ export const fetchBookPageRelatedBooksAsync = (title) => {
               const relatedBooks = [];
               querySnapshot2.forEach((doc2) => {
                 const book = doc2.data();
-                book.description = book.description.split('*');
-                if (book.title !== titleSpaced) {
-                  relatedBooks.push(book);
-                }
+                relatedBooks.push(book);
               });
+
               dispatch(fetchBookPageRelatedBooksSuccess(relatedBooks));
             });
           } else {

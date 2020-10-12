@@ -2,11 +2,11 @@
 
 .related-carousel-master-container {
   width: 90%;
+  margin-bottom: 3em;
 }
 
 .related-carousel-container {
-  padding: 1em 0 0 0;
-
+  padding: 1em;
   // overflow-y: visible !important;
   -webkit-box-shadow: -15px 20px 35px -25px rgba(125, 125, 125, 0.5);
   -moz-box-shadow: -15px 20px 35px -25px rgba(125, 125, 125, 0.5);
@@ -14,9 +14,16 @@
 }
 
 .related-carousel-item {
+  cursor: pointer;
   width: 90%;
   height: auto;
-  // margin: 0 1em;
+  transition: all 0.2s ease-in;
+  @include styles.media(930) {
+    &:hover {
+      transform: scale(1.05);
+      z-index: 1000;
+    }
+  }
 }
 
 .related-carousel-series {

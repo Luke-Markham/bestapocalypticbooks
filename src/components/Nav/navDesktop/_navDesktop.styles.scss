@@ -5,6 +5,7 @@
   position: fixed;
   width: 100%;
   display: grid;
+  align-items: center;
   grid-template-columns: 10% 65% 20%;
   padding: 0.5em 1em;
   z-index: 100;
@@ -32,5 +33,5 @@
 }
 
 .nav-scroll-bkg {
-  background-color: rgba(0, 0, 0, 0.85);
+  background-color: rgba(0, 0, 0, 0.9);
 }

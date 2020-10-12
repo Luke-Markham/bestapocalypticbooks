@@ -17,7 +17,9 @@ const SearchResult = ({
       }}
     >
       {result.title} - {result.author}{' '}
-      {result.series ? '(' + result.series.name + ')' : null}
+      {result.series && result.series.name.length > 0
+        ? '(' + result.series.name + ')'
+        : null}
     </span>
   );
 

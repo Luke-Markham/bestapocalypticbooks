@@ -56,7 +56,6 @@ export const fetchSearchResultsAsync = (searchValue) => {
 
           querySnapshot.forEach((doc) => {
             const data = doc.data();
-            data.description = data.description.split('*');
 
             if (queryTypes[i] === 'author') {
               if (!baseQueryResults.includes(data.author)) {

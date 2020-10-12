@@ -5,53 +5,88 @@
   overflow: hidden;
   padding: 1em;
   color: white;
-  background-size: 50%;
+  background-size: cover;
   background-repeat: no-repeat;
   background-position-x: right;
   background-position-y: center;
+  @include styles.media(768) {
+    display: grid;
+    grid-template-columns: 70% 30%;
+  }
 }
 
 .highlight-details-container {
-  width: 50%;
-
-  .highlight-title {
-    text-transform: capitalize;
-    @include styles.secFontBold;
-    font-size: 2em;
-    @include styles.media(1200) {
-      font-size: 3em;
-      margin: 0;
-    }
-  }
-
-  .highlight-author-and-series-container {
-    display: flex;
-  }
-
-  .highlight-author,
-  .highlight-series {
-    margin-top: 0.5em;
-    font-size: 0.9em;
-    margin-bottom: 0.75em;
-    text-transform: capitalize;
-  }
-  .highlight-series {
-    margin-left: 0.5em;
-  }
-  .highlight-blurb {
-    width: 90%;
-    font-size: 1.2em;
-    @include styles.media(1500) {
-      font-size: 1.5em;
-    }
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  @include styles.media(768) {
+    width: 80%;
   }
 }
 
-.highlight-buttons-and-audio-container {
+.highlight-title {
+  @include styles.secFontBold;
+  text-transform: capitalize;
+  margin: 1em 0 0 0;
+  font-size: 2.5em;
+
+  @include styles.media(768) {
+    margin: 0;
+  }
+
+  @include styles.media(1200) {
+    font-size: 3em;
+  }
+}
+
+.highlight-author-and-series-container {
+  display: flex;
+}
+
+.highlight-author,
+.highlight-series {
+  margin-top: 0.5em;
+  font-size: 0.9em;
+  margin-bottom: 0.75em;
+  text-transform: capitalize;
+}
+.highlight-series {
+  margin-left: 0.5em;
+}
+.highlight-blurb {
+  width: 90%;
+  font-size: 1.2em;
+  @include styles.media(1500) {
+    font-size: 1.5em;
+  }
+}
+
+.highlight-audio-and-buttons-container {
+  margin-top: auto;
+
+  display: grid;
+  grid-template-areas:
+    'audio'
+    'buttons';
+  @include styles.media(768) {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: 'buttons audio';
+  }
+}
+
+.highlight-container > .audioPlayer-container {
+  display: flex;
+  justify-content: flex-start;
+  grid-area: audio;
+}
+
+.highlight-buttons-container {
+  grid-area: buttons;
   display: flex;
   align-items: center;
-  & .audioPlayer-container {
-    margin-left: 1em;
+  margin-top: 1em;
+  @include styles.media(768) {
+    margin-top: 0em;
   }
 }
 
@@ -63,4 +98,12 @@
   position: absolute;
   top: 0;
   right: 0;
+}
+
+.highlight-cover-img-container {
+  & img {
+    -webkit-box-shadow: -15px 15px 5px -6px rgba(0, 0, 0, 0.479);
+    -moz-box-shadow: -15px 15px 5px -6px rgba(0, 0, 0, 0.479);
+    box-shadow: -15px 15px 5px -6px rgba(0, 0, 0, 0.479);
+  }
 }

@@ -1,15 +1,22 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
+import { connect } from 'react-redux';
 import {
   fetchBookPageBookAsync,
   fetchBookPageRelatedBooksAsync,
+  fetchBookPageBookSuccess,
 } from '../../redux/bookPage/bookPageActions';
+import downArrow from '../../assets/svg/down-arrow.svg';
 import Fade from 'react-reveal/Fade';
-import { connect } from 'react-redux';
 import FullBook from '../../components/fullBook/fullBook.component';
-import { useParams } from 'react-router-dom';
 import RelatedCarousel from '../../components/relatedCarousel/relatedCarousel.component';
+import { Element, Link } from 'react-scroll';
+
+const ScrollElement = Element;
+const ScrollLink = Link;
 
 const BookPage = ({
+  navHeight,
   book,
   relatedBooks,
   isFetchingBook,
@@ -18,10 +25,10 @@ const BookPage = ({
 }) => {
   const para = useParams();
 
-  const [path, setPath] = React.useState();
-
   const style = {
-    backgroundImage: `linear-gradient(to right, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.5) 60% ), url(${path})`,
+    backgroundImage: `linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0) 10%, rgba(0, 0, 0, 0.1) 80%, rgba(0, 0, 0, 0.9)),
+    linear-gradient(to right, rgba(0, 0, 0, 1),
+     rgba(0, 0, 0, 0.5) 60% ), url(${book ? book.picUrl : ''})`,
   };
 
   React.useEffect(() => {
@@ -29,27 +36,31 @@ const BookPage = ({
       fetchBookPageBookAsync(para.id);
       fetchBookPageRelatedBooksAsync(para.id);
     }
-    switch (Math.floor(Math.random() * 3) + 1) {
-      case 1:
-        setPath(require('../../assets/png/bookBkg-1.jpg'));
-        break;
-      case 2:
-        setPath(require('../../assets/png/bookBkg-2.jpg'));
-        break;
-      case 3:
-        setPath(require('../../assets/png/bookBkg-3.png'));
-        break;
-      default:
-        break;
-    }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fetchBookPageBookAsync, fetchBookPageRelatedBooksAsync, para.id]);
 
   return (
     <Fade>
-      <div className="book-page-container" style={style}>
-        {!book ? null : <FullBook isFetching={isFetchingBook} book={book} />}
-        {!relatedBooks && !book ? null : (
+      <div className="book-page-container">
+        <div className="book-page-book-container" style={style}>
+          {!book ? null : <FullBook isFetching={isFetchingBook} book={book} />}
+          {!relatedBooks ? null : (
+            <ScrollLink
+              to="book-page-related-carousel"
+              smooth={true}
+              duration={1000}
+              offset={-navHeight}
+            >
+              <img
+                src={downArrow}
+                alt="down arrow"
+                className="book-page-related-down-arrow"
+              />
+            </ScrollLink>
+          )}
+        </div>
+        {!relatedBooks ? null : (
           <RelatedCarousel
             relatedSeries={relatedBooks ? relatedBooks[0].series.name : null}
             books={relatedBooks}
@@ -60,11 +71,12 @@ const BookPage = ({
   );
 };
 
-const mapStateToProps = ({ bookPage }) => ({
-  book: bookPage.book,
-  isFetchingBook: bookPage.isFetchingBook,
-  relatedBooks: bookPage.relatedBooks,
-  isFetchingRelatedBooks: bookPage.isFetchingRelatedBooks,
+const mapStateToProps = (state) => ({
+  book: state.bookPage.book,
+  isFetchingBook: state.bookPage.isFetchingBook,
+  relatedBooks: state.bookPage.relatedBooks,
+  isFetchingRelatedBooks: state.bookPage.isFetchingRelatedBooks,
+  navHeight: state.nav.height,
 });
 
 const mapDispatchToProps = (dispatch) => ({

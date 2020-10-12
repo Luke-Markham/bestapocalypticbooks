@@ -7,7 +7,10 @@ import {
   fetchSearchStart,
   toggleSearchBar,
 } from '../../redux/search/searchActions';
-import { fetchBookPageBookSuccess } from '../../redux/bookPage/bookPageActions';
+import {
+  fetchBookPageBookSuccess,
+  fetchBookPageRelatedBooksSuccess,
+} from '../../redux/bookPage/bookPageActions';
 import { fetchAuthorPageBooksSuccess } from '../../redux/authorPage/authorPageActions';
 import SearchIcon from '../../assets/svg/search.svg';
 import CloseIcon from '../../assets/svg/close.svg';
@@ -26,6 +29,7 @@ const Search = ({
   clearSearchResults,
   // Book Page
   clearPreviousBookPageBookState,
+  clearPreviousBookPageRelatedBooksState,
   pushBookToBookPageState,
   // Author Page
   clearPreviousAuthorPageBooksState,
@@ -40,6 +44,7 @@ const Search = ({
 
   const handleTitleSelect = async (result) => {
     await clearPreviousBookPageBookState(null);
+    await clearPreviousBookPageRelatedBooksState(null);
     history.push(`/books/${dashlize(result.title)}`);
     pushBookToBookPageState(result);
     toggleSearchBar();
@@ -155,23 +160,25 @@ const Search = ({
           value={searchInputValue}
         />
         {/* =-=-=-=-=-=-=-= Close Search =-=-=-=-=-=-=-= */}
-        <div
-          onClick={() => {
-            toggleSearchBar();
-            setSearchInputValue('');
-          }}
-          className={`search-bar-icon-container ${
-            isSearchBarOpen ? 'search-bar-icon-bkg' : ''
-          }`}
-        >
-          <img
-            src={CloseIcon}
-            alt="Close Icon"
-            className={`search-bar-search-close ${
-              isSearchBarOpen ? 'search-bar-search-close-show' : ''
+        {isSearchBarOpen ? (
+          <div
+            onClick={() => {
+              toggleSearchBar();
+              setSearchInputValue('');
+            }}
+            className={`search-bar-icon-container ${
+              isSearchBarOpen ? 'search-bar-icon-bkg' : ''
             }`}
-          />
-        </div>
+          >
+            <img
+              src={CloseIcon}
+              alt="Close Icon"
+              className={`search-bar-search-close ${
+                isSearchBarOpen ? 'search-bar-search-close-show' : ''
+              }`}
+            />
+          </div>
+        ) : null}
       </div>
       {/* =-=-=-=-=-=-=-= Search Results =-=-=-=-=-=-=-= */}
       <div className="search-results-container">
@@ -209,6 +216,8 @@ const mapDispatchToProps = (dispatch) => ({
   // Book Page
   clearPreviousBookPageBookState: (clearValue) =>
     dispatch(fetchBookPageBookSuccess(clearValue)),
+  clearPreviousBookPageRelatedBooksState: (clearValue) =>
+    dispatch(fetchBookPageRelatedBooksSuccess(clearValue)),
   pushBookToBookPageState: (book) => dispatch(fetchBookPageBookSuccess(book)),
   // Author Page
   clearPreviousAuthorPageBooksState: (clearValue) =>

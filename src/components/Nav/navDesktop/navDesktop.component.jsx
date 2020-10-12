@@ -11,7 +11,7 @@ const NavDesktop = ({ saveNavHeightValue }) => {
   const navRef = useRef(null);
   const location = useLocation();
   useEffect(() => {
-    if (location.pathname === '/home') {
+    if (location.pathname === '/home' || location.pathname.includes('/books')) {
       setTimeout(() => {
         console.log(navRef.current.clientHeight);
         saveNavHeightValue(navRef.current.clientHeight);
@@ -41,7 +41,7 @@ const NavDesktop = ({ saveNavHeightValue }) => {
         <NavLink to="/about">About</NavLink>
         <NavLink to="/contact">Contact</NavLink>
       </ul>
-      <Search/>
+      <Search />
     </nav>
   );
 };

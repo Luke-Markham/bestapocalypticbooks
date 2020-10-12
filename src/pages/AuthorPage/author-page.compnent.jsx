@@ -28,7 +28,7 @@ const AuthorPage = ({ authorsBooks, fetchAuthorPageBooksAsync }) => {
         setPath(require('../../assets/png/bookBkg-2.jpg'));
         break;
       case 3:
-        setPath(require('../../assets/png/bookBkg-3.png'));
+        setPath(require('../../assets/png/bookBkg-3.jpg'));
         break;
       default:
         break;
@@ -39,7 +39,16 @@ const AuthorPage = ({ authorsBooks, fetchAuthorPageBooksAsync }) => {
   return (
     <Fade>
       <div className="author-page-container" style={style}>
-        {authorsBooks ? <BooksInGrid books={authorsBooks} /> : null}
+        <Fade duratation={1000} delay={500}>
+          <p className="author-page-author-name">
+            {authorsBooks ? authorsBooks[0].author : null}
+          </p>
+        </Fade>
+        {authorsBooks ? (
+          <Fade duratation={1000}>
+            <BooksInGrid books={authorsBooks} />
+          </Fade>
+        ) : null}
       </div>
     </Fade>
   );

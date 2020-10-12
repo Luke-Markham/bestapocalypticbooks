@@ -2,46 +2,65 @@
 
 .full-book-container {
   display: grid;
-  grid-gap: 1.5em;
-  grid-template-columns: 60% 40%;
+  grid-gap: 1em;
   grid-template-areas:
-    'featureDesc featureImg '
-    'btnLinks featureImg'
-    'loader loader';
-  width: 80%;
+    'featureImg'
+    'audio'
+    'btnLinks';
+  grid-template-columns: 100%;
+  width: 95%;
+  @include styles.media(768) {
+    width: 90%;
+    grid-template-areas:
+      'featureDesc featureImg '
+      'btnLinks audio';
+    grid-template-columns: 60% 40%;
+  }
+  @include styles.media(1040) {
+    width: 80%;
+  }
+  @include styles.media(1240) {
+    grid-template-areas:
+      'featureDesc featureDesc featureImg '
+      'btnLinks audio featureImg';
+    grid-template-columns: 35% 25% 40%;
+  }
 }
 
 .full-book-description-container {
   grid-area: featureDesc;
   color: white;
-  .full-book-title {
-    text-transform: capitalize;
-    @include styles.secFontBold;
-    font-size: 4em;
-    @include styles.media(1200) {
-      font-size: 5em;
-      margin: 0;
-    }
-  }
+}
+.full-book-title {
+  margin: 0;
+  text-transform: capitalize;
 
-  .full-book-author-and-series-container {
-    display: flex;
+  @include styles.secFontBold;
+  font-size: 4em;
+  @include styles.media(1240) {
+    font-size: 5em;
   }
-  .full-book-author,
-  .full-book-series {
-    margin-top: 0.5em;
-    font-size: 0.9em;
-    margin-bottom: 0.75em;
-    text-transform: capitalize;
-  }
-  .full-book-series {
-    margin-left: 0.5em;
-  }
-  .full-book-blurb {
+}
+.full-book-author-and-series-container {
+  display: flex;
+}
+.full-book-author,
+.full-book-series {
+  margin-top: 0.5em;
+  font-size: 0.9em;
+  margin-bottom: 0.75em;
+  text-transform: capitalize;
+}
+.full-book-series {
+  margin-left: 0.5em;
+}
+.full-book-blurb {
+  font-size: 1em;
+  @include styles.media(1240) {
     font-size: 1.2em;
-    @include styles.media(1500) {
-      font-size: 1.5em;
-    }
+  }
+  @include styles.media(1500) {
+    font-size: 1.5em;
   }
 }
 
@@ -49,6 +68,13 @@
   grid-area: featureImg;
   align-self: center;
   justify-self: center;
+
+  width: 65%;
+  display: flex;
+  justify-content: center;
+  @include styles.media(768) {
+    width: unset;
+  }
 
   .full-book-img {
     max-width: 100%;
@@ -61,11 +87,23 @@
 
 .btn-links-and-audio-container {
   display: flex;
-  align-items: center;
+  justify-content: center;
   grid-area: btnLinks;
-  align-self: flex-end;
+  @include styles.media(768) {
+    justify-content: flex-start;
+  }
+  @include styles.media(1040) {
+    align-items: center;
+  }
+}
 
-  & > .audioPlayer-container {
-    margin-left: auto;
+.full-book-container > .audioPlayer-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  grid-area: audio;
+  @include styles.media(768) {
+    // margin-left: auto;
+    align-items: center;
   }
 }

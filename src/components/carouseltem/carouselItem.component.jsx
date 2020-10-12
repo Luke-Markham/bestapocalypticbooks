@@ -6,7 +6,16 @@ const CarouselItem = ({
   book,
   handleOpenHighlight,
   handleSelectHighlightBook,
+  isMobile,
 }) => {
+  function handleSelectItem(book, index) {
+    handleSelectHighlightBook(book);
+    handleOpenHighlight(true);
+    if (!isMobile) {
+      setActiveItem(index);
+    }
+  }
+
   return (
     <div
       className={`carousel-item-master-container ${
@@ -15,9 +24,7 @@ const CarouselItem = ({
     >
       <img
         onClick={() => {
-          handleSelectHighlightBook(book);
-          handleOpenHighlight(true);
-          setActiveItem(index);
+          handleSelectItem(book, index);
         }}
         className="carousel-item-img"
         src={book.picUrl}

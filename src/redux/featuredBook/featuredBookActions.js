@@ -26,7 +26,7 @@ export const fetchFeaturedBookAsync = () => {
   return (dispatch) => {
     dispatch(fetchFeaturedBookStart);
     const booksRef = firestore.collection('books');
-    const query = booksRef.where('featureItem', '==', true);
+    const query = booksRef.where('featured', '==', true);
     query
       .get()
       .then((querySnapshot) => {
@@ -36,7 +36,6 @@ export const fetchFeaturedBookAsync = () => {
         let result;
         querySnapshot.forEach((doc) => {
           result = doc.data();
-          result.description = result.description.split('*');
         });
         dispatch(fetchFeaturedBookSuccess(result));
       })

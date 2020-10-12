@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import CarouselItem from '../carouseltem/carouselItem.component';
@@ -10,6 +10,7 @@ const ItemCarousel = ({
   handleOpenHighlight,
   setActiveItem,
   activeItem,
+  isMobile,
 }) => {
   return (
     <div className="item-carousel-master-container">
@@ -85,6 +86,7 @@ const ItemCarousel = ({
                 book={item}
                 handleSelectHighlightBook={handleSelectHighlightBook}
                 handleOpenHighlight={handleOpenHighlight}
+                isMobile={isMobile}
               />
             );
           })}

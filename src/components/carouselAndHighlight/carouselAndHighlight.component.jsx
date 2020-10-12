@@ -1,33 +1,33 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
+import { useMediaQuery } from 'react-responsive';
 import { fetchCarouselBooksAsync } from '../../redux/carousel/carouselActions';
+import { motion, AnimatePresence } from 'framer-motion';
 import Highlight from '../highlight/highlight.component';
 import ItemCarousel from '../itemCarousel/itemCarousel.component';
-import { motion, AnimatePresence } from 'framer-motion';
 
 const CarouselAndHighlight = ({
   genre,
   fetchCarouselBooksAsync,
   carouselBooks,
 }) => {
-  const [highlightBook, setHighlightBook] = useState(false);
-  const [openHighlight, setOpenHighlight] = useState(false);
-  const [activeItem, setActiveItem] = useState(false);
+  const [highlightBook, setHighlightBook] = React.useState(false);
+  const [openHighlight, setOpenHighlight] = React.useState(false);
+  const [activeItem, setActiveItem] = React.useState(false);
+  const isMobile = useMediaQuery({ minWidth: 0, maxWidth: 767 });
 
   function handleSelectHighlightBook(book) {
     setHighlightBook(false);
     setHighlightBook(book);
   }
 
-  useEffect(() => {
+  React.useEffect(() => {
     fetchCarouselBooksAsync(genre);
   }, [fetchCarouselBooksAsync, genre]);
 
   return (
     <>
-      {!carouselBooks[genre] ? (
-        <h1>loading...</h1>
-      ) : (
+      {!carouselBooks[genre] ? null : (
         <div>
           <ItemCarousel
             activeItem={activeItem}
@@ -36,6 +36,7 @@ const CarouselAndHighlight = ({
             books={carouselBooks[genre]}
             handleSelectHighlightBook={handleSelectHighlightBook}
             handleOpenHighlight={setOpenHighlight}
+            isMobile={isMobile}
           />
 
           <AnimatePresence exitBeforeEnter>
@@ -65,6 +66,7 @@ const CarouselAndHighlight = ({
                         handleSelectHighlightBook={setHighlightBook}
                         handleOpenHighlight={setOpenHighlight}
                         setActiveItem={setActiveItem}
+                        isMobile={isMobile}
                       />
                     </motion.div>
                   )}

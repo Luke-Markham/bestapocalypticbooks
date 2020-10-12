@@ -1,0 +1,105 @@
+@use '../../../utilities/styles';
+
+.mobile-nav {
+  color: white;
+  position: fixed;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  z-index: 100;
+  background-color: rgba(0, 0, 0, 0.9);
+  .nav-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  & ul {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
+  }
+  a {
+    width: 100%;
+    list-style-type: none;
+    text-decoration: none;
+    padding: 0.5em;
+    color: White;
+    @include styles.priFontBold;
+    &.active {
+      background-color: White;
+      color: black;
+    }
+  }
+}
+
+.mobile-nav-contents-container {
+  display: flex;
+  background-color: #2e2e2e;
+  width: 100%;
+  flex-direction: column;
+  animation: slideIn 1s;
+}
+
+.mobile-nav-top-bar-container {
+  display: grid;
+  grid-template-columns: 10% 90%;
+  padding: 0.5em 0.25em;
+}
+
+.hamburger-and-search-icon-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+  & .search-container {
+    width: 100%;
+  }
+}
+
+.mobile-nav-hamburger-icon {
+  width: 20px;
+  height: 20px;
+  padding: 0.5em;
+  animation: fadeIn 0.5s;
+}
+
+.mobile-nav-close-icon {
+  padding: 0.5em;
+  width: 17.5px;
+  height: 17.5px;
+  animation: fadeInAndSpin 1s;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeInAndSpin {
+  0% {
+    opacity: 0;
+    transform: rotate(0deg);
+  }
+  100% {
+    opacity: 1;
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
