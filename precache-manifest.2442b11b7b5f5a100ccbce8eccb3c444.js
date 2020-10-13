@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "2e6a674f7922b20589e5f9247ee6ae83",
+    "revision": "f3059dd1f46a257ab3f00dca84a08e06",
     "url": "/bestapocalypticbooks/index.html"
   },
   {
@@ -36,12 +36,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/bestapocalypticbooks/static/js/3.f0c8b998.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "f4c78ec89e89b93f1d36",
-    "url": "/bestapocalypticbooks/static/js/4.52d3fb7e.chunk.js"
+    "revision": "8a0b16413e97528c0700",
+    "url": "/bestapocalypticbooks/static/js/4.9fc80e2a.chunk.js"
   },
   {
-    "revision": "ac149bfddb337207e8ff",
-    "url": "/bestapocalypticbooks/static/js/5.606064ad.chunk.js"
+    "revision": "a01b951428ac1d9f6bc5",
+    "url": "/bestapocalypticbooks/static/js/5.f7baee6f.chunk.js"
   },
   {
     "revision": "0527faad4272eeef41d0",
@@ -52,20 +52,20 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/bestapocalypticbooks/static/js/7.34aaeda7.chunk.js"
   },
   {
-    "revision": "87904456705bed467c26",
-    "url": "/bestapocalypticbooks/static/js/8.b4333b6b.chunk.js"
+    "revision": "f2e7d8019d04f95d40f2",
+    "url": "/bestapocalypticbooks/static/js/8.b9630f2a.chunk.js"
   },
   {
-    "revision": "a1c859a964c7688db3c0",
-    "url": "/bestapocalypticbooks/static/js/9.39a16afa.chunk.js"
+    "revision": "8b2658ef2d42b2441654",
+    "url": "/bestapocalypticbooks/static/js/9.f5b6d2c3.chunk.js"
   },
   {
     "revision": "a30b24e61cd905b76a9a",
     "url": "/bestapocalypticbooks/static/js/main.865f02ca.chunk.js"
   },
   {
-    "revision": "1a67100d2a9efebfe37e",
-    "url": "/bestapocalypticbooks/static/js/runtime-main.02a8a144.js"
+    "revision": "a905d94750cbcabb86df",
+    "url": "/bestapocalypticbooks/static/js/runtime-main.b04dc3e7.js"
   },
   {
     "revision": "bbb316733b50a3dc0f527d68e780c8c8",
