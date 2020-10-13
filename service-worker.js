@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/bestapocalypticbooks/precache-manifest.86760785ae963ccc91cede2b880926d8.js"
+  "/bestapocalypticbooks/precache-manifest.25a9be86ea8e036fee172ca143eb627b.js"
 );
 
 self.addEventListener('message', (event) => {
